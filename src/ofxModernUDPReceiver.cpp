@@ -25,7 +25,7 @@ void ofxModernUDPReceiver::receive(const boost::system::error_code &error_code,
     std::cout.write(buf.data(), len);
 }
 
-[[ nodiscard ]] bool ofxModernUDPReceiver::setup(int port) {
+NO_DISCARD bool ofxModernUDPReceiver::setup(int port) {
     try {
         socket = udp::socket(io_service, udp::endpoint(udp::v4(), port));
     } catch(std::exception &e) {

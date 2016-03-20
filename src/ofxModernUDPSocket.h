@@ -8,6 +8,7 @@
 #pragma once
 
 #include <boost/asio.hpp>
+#include "./detail/macro.h"
 
 /// UDP Base Class
 
