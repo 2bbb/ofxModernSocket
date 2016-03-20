@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "ofxModernOscArgument.h"
 
@@ -18,6 +19,37 @@ namespace ofx {
             std::vector<Argument> args;
         public:
             const std::string address;
+            template <typename ... ArgumentTypes>
+            
+            Message(std::string &address)
+            : address(address) {}
+            
+            template <typename ArgumentType, typename ... ArgumentTypes>
+            Message(std::string &address, ArgumentType &&argument, ArgumentTypes && ... arguments)
+            : address(address) {
+                addArguments(std::forward<ArgumentType>(argument), std::forward<ArgumentTypes>(arguments) ...);
+            }
+            
+            void addArgument(TagType tag) {
+                args.emplace_back(tag);
+            }
+
+            template <typename ArgumentType>
+            void addArgument(TagType tag, ArgumentType &&arg) {
+                args.emplace_back(tag, std::forward<ArgumentType>(arg));
+            }
+            
+            template <typename ArgumentType, typename ... ArgumentTypes>
+            void addArguments(ArgumentType &&argument, ArgumentTypes && ... arguments) {
+                args.emplace_back(std::forward<ArgumentType>(argument));
+                if(sizeof...(arguments)) addArguments(std::forward<ArgumentTypes>(arguments) ...);
+            }
+            
+            template <typename ArgumentType>
+            Message &operator<<(ArgumentType &&arg) {
+                args.emplace_back(arg);
+                return *this;
+            }
             
             inline std::size_t size() const {
                 return args.size();
