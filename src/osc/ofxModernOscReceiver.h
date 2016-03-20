@@ -8,7 +8,7 @@
 #pragma once
 
 #include <unordered_map>
-#include <queue>
+#include <vector>
 
 #include "ofxModernUDPReceiver.h"
 #include "ofxModernOscMessage.h"
@@ -31,7 +31,7 @@ namespace ofx {
         
         class Receiver : public ofxModernUDPReceiver {
             ofThreadChannel<ofxModernOscMessage> messageChannel;
-            std::queue<ofxModernOscMessage> queues;
+            std::vector<ofxModernOscMessage> leakedMessages;
         protected:
             virtual void receive(const boost::system::error_code &error_code,
                                  std::array<char, buf_size> &buf,
@@ -39,8 +39,7 @@ namespace ofx {
             void handle(const OSCPP::Server::Packet &packet);
             std::unordered_multimap<std::string, Callback> callbacks;
             void update(ofEventArgs &) {
-                decltype(queues) empty_queue;
-                queues.swap(empty_queue);
+                leakedMessages.clear();
                 ofxModernOscMessage mess;
                 while(messageChannel.tryReceive(mess)) {
                     std::size_t num = callbacks.count(mess.address);
@@ -48,7 +47,7 @@ namespace ofx {
                     if(it != callbacks.end()) for(std::size_t i = 0, num = callbacks.count(mess.address); i < num; it++, i++) {
                         it->second(mess);
                     } else {
-                        queues.push(std::move(mess));
+                        leakedMessages.push_back(std::move(mess));
                     }
                 }
             }
@@ -65,6 +64,16 @@ namespace ofx {
             void addCallback(const std::string &bindAddress, Callback callback) {
                 callbacks.insert(std::make_pair(bindAddress, callback));
             }
+            
+            using iterator = std::vector<ofxModernOscMessage>::iterator;
+            using const_iterator = std::vector<ofxModernOscMessage>::const_iterator;
+            
+            iterator begin() { return leakedMessages.begin(); }
+            iterator end() { return leakedMessages.end(); }
+            const_iterator begin() const { return leakedMessages.cbegin(); }
+            const_iterator end() const { return leakedMessages.cend(); }
+            const_iterator cbegin() const { return leakedMessages.cbegin(); }
+            const_iterator cend() const { return leakedMessages.cend(); }
         };
     };
 };
