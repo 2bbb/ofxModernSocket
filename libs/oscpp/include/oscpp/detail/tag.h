@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <string>
+
 // cite: https://github.com/openframeworks/openFrameworks/blob/0.9.3/addons/ofxOsc/src/ofxOscMessage.h#L70-L87
 /*
 	OSC 1.1 specifications types:
@@ -25,7 +27,6 @@
  t - TIMETAG, an OSC timetag in NTP format, encoded in the data section
 	See : http://cnmat.berkeley.edu/system/files/attachments/Nime09OSCfinal.pdf
 	*/
-
 
 namespace OSCPP {
 #define TagCase(Name) case Tag::Name: return #Name;
