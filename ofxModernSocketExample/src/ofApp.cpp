@@ -10,6 +10,13 @@ public:
         
         receiver.setup(9005);
         receiver.addCallback("/test", [](ofxModernOscMessage &mess) { ofLogNotice("ofApp") << mess; });
+        receiver.addThreadCallback("/json",
+                                   [](ofxModernOscMessage &mess) {
+                                       return ofJson::parse(mess[0].get<std::string>());
+                                   },
+                                   [](ofJson::basic_json &&json) {
+                                       ofLogNotice() << ofGetElapsedTimef() << ":" << json;
+                                   });
     }
     void update() {
         for(auto mess : receiver) {

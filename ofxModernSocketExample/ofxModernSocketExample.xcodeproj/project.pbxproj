@@ -633,6 +633,8 @@
 		95C8BFAB1C9EA7EF00143C30 /* ofxModernUDPReceiver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxModernUDPReceiver.h; sourceTree = "<group>"; };
 		95C8BFAC1C9EA7EF00143C30 /* ofxModernUDPSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxModernUDPSocket.cpp; sourceTree = "<group>"; };
 		95C8BFAD1C9EA7EF00143C30 /* ofxModernUDPSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxModernUDPSocket.h; sourceTree = "<group>"; };
+		95C8BFB01C9EBCD200143C30 /* ofx_modern_socket_type_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofx_modern_socket_type_utils.h; sourceTree = "<group>"; };
+		95C8BFB21C9EBE2900143C30 /* ofxModernOscThreadedProcessUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxModernOscThreadedProcessUtils.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* ofxModernSocketExampleDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ofxModernSocketExampleDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
@@ -736,6 +738,7 @@
 			isa = PBXGroup;
 			children = (
 				95C0BCCC1C9E615D0043897F /* macro.h */,
+				95C8BFB01C9EBCD200143C30 /* ofx_modern_socket_type_utils.h */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 		95C0BCCD1C9E63430043897F /* osc */ = {
 			isa = PBXGroup;
 			children = (
+				95C8BFB11C9EBE1C00143C30 /* detail */,
 				95C0BCD81C9E79C90043897F /* ofxModernOscTag.h */,
 				95C0BCD61C9E798A0043897F /* ofxModernOscArgument.h */,
 				95C0BCD51C9E798A0043897F /* ofxModernOscArgument.cpp */,
@@ -1589,6 +1593,14 @@
 				95C8BFAC1C9EA7EF00143C30 /* ofxModernUDPSocket.cpp */,
 			);
 			path = udp;
+			sourceTree = "<group>";
+		};
+		95C8BFB11C9EBE1C00143C30 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				95C8BFB21C9EBE2900143C30 /* ofxModernOscThreadedProcessUtils.h */,
+			);
+			path = detail;
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
