@@ -38,20 +38,20 @@ Argument::Argument(TagType tag)
 
 #define define_num_cast_operator(type)\
 Argument::operator type() const {\
-switch(tag) {\
-case OSCPP::Tag::True:\
-case OSCPP::Tag::False:\
-return cast_num(type, b);\
-case OSCPP::Tag::Char:   return cast_num(type, c);\
-case OSCPP::Tag::Int32:  return cast_num(type, i);\
-case OSCPP::Tag::Int64:  return cast_num(type, l);\
-case OSCPP::Tag::Float:  return cast_num(type, f);\
-case OSCPP::Tag::Double: return cast_num(type, d);\
-case OSCPP::Tag::String: return static_cast<type>(std::stol(str));\
-default:\
-ofLogWarning("ofxModernOscMessage") << ("argument is not " #type ": ") << OSCPP::TagName(tag);\
-return static_cast<type>(0);\
-}\
+    switch(tag) {\
+        case OSCPP::Tag::True:\
+        case OSCPP::Tag::False:\
+            return cast_num(type, b);\
+        case OSCPP::Tag::Char:   return cast_num(type, c);\
+        case OSCPP::Tag::Int32:  return cast_num(type, i);\
+        case OSCPP::Tag::Int64:  return cast_num(type, l);\
+        case OSCPP::Tag::Float:  return cast_num(type, f);\
+        case OSCPP::Tag::Double: return cast_num(type, d);\
+        case OSCPP::Tag::String: return static_cast<type>(std::stol(str));\
+        default:\
+            ofLogWarning("ofxModernOscMessage") << ("argument is not " #type ": ") << OSCPP::TagName(tag);\
+            return static_cast<type>(0);\
+    }\
 }
 
 define_num_cast_operator(bool);
@@ -74,5 +74,5 @@ Argument::operator std::string() const {
 END_NAMESPACE_OFX_MODERN_OSC
 
 std::ostream &operator<<(std::ostream &os, const ofxModernOscArgument &arg) {
-    return os << arg.tag << ": " << arg.stringValue() << std::endl;
+    return os << arg.tag << ": " << arg.stringValue();
 }
