@@ -39,6 +39,9 @@ Argument::Argument(OSCPP::TagType tag)
 #define define_num_cast_operator(type)\
 Argument::operator type() const {\
     switch(tag) {\
+        case OSCPP::Tag::True:\
+        case OSCPP::Tag::False:\
+            return cast_num(type, b);\
         case OSCPP::Tag::Char:   return cast_num(type, c);\
         case OSCPP::Tag::Int32:  return cast_num(type, i);\
         case OSCPP::Tag::Int64:  return cast_num(type, l);\
@@ -51,6 +54,7 @@ Argument::operator type() const {\
     }\
 }
 
+define_num_cast_operator(bool);
 define_num_cast_operator(std::int8_t);
 define_num_cast_operator(std::int32_t);
 define_num_cast_operator(std::int64_t);

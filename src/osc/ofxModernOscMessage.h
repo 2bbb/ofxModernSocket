@@ -16,6 +16,7 @@ namespace ofx {
     namespace ModernOsc {
         struct Argument {
             union number_value {
+                bool b;
                 std::int8_t c;
                 std::int32_t i;
                 std::int64_t l;
@@ -40,6 +41,7 @@ namespace ofx {
             Argument(OSCPP::TagType tag, const std::string &str)
             : tag(tag), str(str) {}
             
+            operator bool() const;
             operator std::int8_t() const;
             operator std::int32_t() const;
             operator std::int64_t() const;
