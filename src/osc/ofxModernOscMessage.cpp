@@ -18,6 +18,7 @@
 BEGIN_NAMESPACE_OFX_MODERN_OSC
 
 std::ostream &operator<<(std::ostream &os, const Message &mess) {
+    if(!mess.size()) return os << mess.address << " :[]";
     os << mess.address << " :[" << std::endl;
     for(std::size_t i = 0; i < mess.size(); i++) {
         os << "  " << i << ": " << mess[i].stringValue() << std::endl;
