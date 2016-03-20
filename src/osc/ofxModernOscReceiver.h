@@ -8,6 +8,7 @@
 #pragma once
 
 #include "ofxModernUDPReceiver.h"
+#include "ofxModernOscMessage.h"
 
 namespace OSCPP {
     namespace Server {

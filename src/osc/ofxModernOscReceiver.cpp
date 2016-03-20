@@ -45,22 +45,40 @@ void Receiver::handle(const OSCPP::Server::Packet &packet) {
         OSCPP::Server::ArgStream args(msg.args());
         
         std::cout << address << std::endl;
+        ofxModernOscMessage mess(address);
+        
         while(!args.atEnd()) {
-            auto tag = args.tag();
-            std::cout << tag << ": ";
+            TagType tag = args.tag();
             switch(tag) {
-                case 's':
-                    std::cout << args.string();
+                case OSCPP::Tag::True:
+                case OSCPP::Tag::False:
+                case OSCPP::Tag::IMPULSE:
+                case OSCPP::Tag::NIL:
+                    mess.addArgument(tag);
                     break;
-                case 'b':
-                    std::cout << "[blob]";
+                case OSCPP::Tag::Char:
+                    mess.addArgument(tag, args.int8());
+                    break;
+                case OSCPP::Tag::Int32:
+                    mess.addArgument(tag, args.int32());
+                    break;
+                case OSCPP::Tag::Int64:
+                    mess.addArgument(tag, args.int64());
+                    break;
+                case OSCPP::Tag::Float:
+                    mess.addArgument(tag, args.float32());
+                    break;
+                case OSCPP::Tag::Double:
+                    mess.addArgument(tag, args.float64());
+                    break;
+                case OSCPP::Tag::String:
+                    mess.addArgument(tag, args.string());
                     break;
                 default:
-                    std::cout << args.float32();
                     break;
             }
-            std::cout << std::endl;
         }
+        std::cout << mess;
     }
 }
 
