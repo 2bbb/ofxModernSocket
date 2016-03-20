@@ -117,7 +117,74 @@ public:
     {
         drop(m_tags.getChar());
     }
-
+    
+    inline bool isNumeral(TagType tag) {
+        switch (tag) {
+            case Tag::True:
+            case Tag::False:
+            case Tag::Char:
+            case Tag::Int32:
+            case Tag::Int64:
+            case Tag::Float:
+            case Tag::Double:
+                return true;
+            default:
+                return false;
+        }
+    }
+    
+    template <typename type>
+    type getNumAsType(TagType tag) {
+        switch (tag) {
+            case Tag::True:
+                return (type)true;
+            case Tag::False:
+                return (type)false;
+            case Tag::Char:
+                return (type)m_args.getChar();
+            case Tag::Int32:
+                return (type)m_args.getInt32();
+            case Tag::Int64:
+                return (type)m_args.getInt64();
+            case Tag::Float:
+                return (type)m_args.getFloat32();
+            case Tag::Double:
+                return (type)m_args.getFloat64();
+            default:
+                return (type)0;
+        }
+    }
+    
+    //! Get next integer argument.
+    /*!
+     * Read next numerical argument from the input stream and convert it to
+     * an integer.
+     *
+     * \exception OSCPP::UnderrunError stream buffer underrun.
+     * \exception OSCPP::ParseError argument could not be converted.
+     */
+    bool boolean()
+    {
+        const char t = m_tags.getChar();
+        if(isNumeral(t)) return getNumAsType<bool>(t);
+        throw ParseError("Cannot convert argument to int");
+    }
+    
+    //! Get next integer argument.
+    /*!
+     * Read next numerical argument from the input stream and convert it to
+     * an integer.
+     *
+     * \exception OSCPP::UnderrunError stream buffer underrun.
+     * \exception OSCPP::ParseError argument could not be converted.
+     */
+    int8_t int8()
+    {
+        const char t = m_tags.getChar();
+        if(isNumeral(t)) return getNumAsType<int8_t>(t);
+        throw ParseError("Cannot convert argument to int");
+    }
+    
     //! Get next integer argument.
     /*!
      * Read next numerical argument from the input stream and convert it to
@@ -129,11 +196,25 @@ public:
     int32_t int32()
     {
         const char t = m_tags.getChar();
-        if (t == 'i') return m_args.getInt32();
-        if (t == 'f') return (int32_t)m_args.getFloat32();
+        if(isNumeral(t)) return getNumAsType<int32_t>(t);
         throw ParseError("Cannot convert argument to int");
     }
 
+    //! Get next integer argument.
+    /*!
+     * Read next numerical argument from the input stream and convert it to
+     * an integer.
+     *
+     * \exception OSCPP::UnderrunError stream buffer underrun.
+     * \exception OSCPP::ParseError argument could not be converted.
+     */
+    int64_t int64()
+    {
+        const char t = m_tags.getChar();
+        if(isNumeral(t)) return getNumAsType<int64_t>(t);
+        throw ParseError("Cannot convert argument to int");
+    }
+    
     //! Get next float argument.
     /*!
      * Read next numerical argument from the input stream and convert it to
@@ -145,11 +226,31 @@ public:
     float float32()
     {
         const char t = m_tags.getChar();
-        if (t == 'f') return m_args.getFloat32();
-        if (t == 'i') return (float)m_args.getInt32();
+        if(isNumeral(t)) return getNumAsType<float>(t);
+        switch (t) {
+            case Tag::String:
+                return std::stof(m_args.getString());
+            default:
+                break;
+        }
         throw ParseError("Cannot convert argument to float");
     }
 
+    //! Get next float argument.
+    /*!
+     * Read next numerical argument from the input stream and convert it to
+     * a float.
+     *
+     * \exception OSCPP::UnderrunError stream buffer underrun.
+     * \exception OSCPP::ParseError argument could not be converted.
+     */
+    double float64()
+    {
+        const char t = m_tags.getChar();
+        if(isNumeral(t)) return getNumAsType<double>(t);
+        throw ParseError("Cannot convert argument to float");
+    }
+    
     //! Get next string argument.
     /*!
      * Read next string argument and return it as a NULL-terminated string.

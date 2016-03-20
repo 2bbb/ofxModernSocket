@@ -310,6 +310,16 @@ public:
     }
 
     // throw (UnderrunError)
+    inline int64_t getInt64()
+    {
+        checkReadable(8);
+        int64_t n;
+        std::memcpy(&n, pos(), 8);
+        advance(8);
+        return convert64<B>(n);
+    }
+    
+    // throw (UnderrunError)
     inline uint64_t getUInt64()
     {
         checkReadable(8);
