@@ -42,7 +42,7 @@ void ofxModernUDPReceiver::receive(const boost::system::error_code &error_code,
             try {
                 len = this->socket.receive_from(boost::asio::buffer(recv_buf), remote_endpoint, 0, error);
                 if(error) {
-                    ofLogError("ofxModernUDPReceiver") << error;
+                    ofLogError("ofxModernUDPReceiver") << error.message();
                 } else {
                     this->receive(error, recv_buf, len);
                 }
