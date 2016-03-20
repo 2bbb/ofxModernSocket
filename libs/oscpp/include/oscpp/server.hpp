@@ -42,10 +42,19 @@ namespace Server {
  *
  * Supported tags and their correspondong types are:
  *
- *  i       -- 32 bit signed integer number<br>
- *  f       -- 32 bit floating point number<br>
- *  s       -- NULL-terminated string padded to 4-byte boundary<br>
- *  b       -- 32-bit integer size followed by 4-byte aligned data
+ * i -- 32bit integer<br>
+ * h -- 64bit integer<br>
+ * f -- 32bit floating point number<br>
+ * d -- 64bit (double) floating point number<br>
+ * s -- string<br>
+ * S -- symbol<br>
+ * c -- char<br>
+ * m -- 4 byte midi packet (8 digits hexadecimal)<br>
+ * T -- TRUE (no value required)<br>
+ * F -- FALSE (no value required)<br>
+ * N -- NIL (no value required)<br>
+ * I -- IMPULSE, act as a trigger (no value required), previously named INFINITUM<br>
+ * t -- TIMETAG, an OSC timetag in NTP format, encoded in the data section
  *
  * \sa getArgInt32
  * \sa getArgFloat32
