@@ -60,6 +60,11 @@ namespace ofx {
             operator float() const;
             operator double() const;
             operator std::string() const;
+            
+            template <typename type>
+            type get() const {
+                return operator type();
+            }
         };
     };
 };
