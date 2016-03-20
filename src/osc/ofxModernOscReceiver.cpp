@@ -44,7 +44,6 @@ void Receiver::handle(const OSCPP::Server::Packet &packet) {
         // Get argument stream
         OSCPP::Server::ArgStream args(msg.args());
         
-        std::cout << address << std::endl;
         ofxModernOscMessage mess(address);
         
         while(!args.atEnd()) {
@@ -78,7 +77,7 @@ void Receiver::handle(const OSCPP::Server::Packet &packet) {
                     break;
             }
         }
-        std::cout << mess;
+        messageChannel.send(std::move(mess));
     }
 }
 

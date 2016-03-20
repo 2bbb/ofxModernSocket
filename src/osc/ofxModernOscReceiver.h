@@ -10,6 +10,7 @@
 #include "ofxModernUDPReceiver.h"
 #include "ofxModernOscMessage.h"
 
+#include "ofThreadChannel.h"
 namespace OSCPP {
     namespace Server {
         class Packet;
@@ -21,6 +22,7 @@ namespace OSCPP {
 namespace ofx {
     namespace ModernOsc {
         class Receiver : public ofxModernUDPReceiver {
+            ofThreadChannel<ofxModernOscMessage> messageChannel;
         protected:
             virtual void receive(const boost::system::error_code &error_code,
                                  std::array<char, buf_size> &buf,
