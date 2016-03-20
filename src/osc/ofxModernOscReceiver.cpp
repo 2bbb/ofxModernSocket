@@ -11,14 +11,23 @@
 #include <iostream>
 #include <oscpp/print.hpp>
 
-void ofxModernOscReceiver::receive(const boost::system::error_code &error_code,
+#define BEGIN_NAMESPACE_OFX_MODERN_OSC namespace ofx {\
+    namespace ModernOsc {
+
+#define END_NAMESPACE_OFX_MODERN_OSC\
+    };\
+};
+
+BEGIN_NAMESPACE_OFX_MODERN_OSC
+
+void Receiver::receive(const boost::system::error_code &error_code,
                                    std::array<char, buf_size> &buf,
                                    std::size_t len)
 {
     handle(OSCPP::Server::Packet(buf.data(), len));
 }
 
-void ofxModernOscReceiver::handle(const OSCPP::Server::Packet &packet) {
+void Receiver::handle(const OSCPP::Server::Packet &packet) {
     if (packet.isBundle()) {
         // Convert to bundle
         OSCPP::Server::Bundle bundle(packet);
@@ -54,3 +63,5 @@ void ofxModernOscReceiver::handle(const OSCPP::Server::Packet &packet) {
         }
     }
 }
+
+END_NAMESPACE_OFX_MODERN_OSC
