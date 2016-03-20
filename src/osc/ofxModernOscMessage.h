@@ -37,12 +37,15 @@ namespace ofx {
             : tag(tag) { num.f = f; }
             Argument(OSCPP::TagType tag, double d)
             : tag(tag) { num.d = d; }
+            Argument(OSCPP::TagType tag, const std::string &str)
+            : tag(tag), str(str) {}
             
             operator std::int8_t() const;
             operator std::int32_t() const;
             operator std::int64_t() const;
             operator float() const;
             operator double() const;
+            operator std::string() const;
         };
 
         class Message {

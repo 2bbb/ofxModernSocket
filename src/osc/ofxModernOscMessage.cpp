@@ -59,4 +59,22 @@ define_num_cast_operator(double);
 
 #undef cast_num
 #undef define_num_cast_operator
+
+Argument::operator std::string() const {
+    if(tag != OSCPP::Tag::String) {
+        ofLogWarning("ofxModernOscMessage") << ("argument is not string: ") << OSCPP::TagName(tag);
+    }
+    switch(tag) {
+        case OSCPP::Tag::String: return str;
+        case OSCPP::Tag::True:   return std::string("True");
+        case OSCPP::Tag::False:  return std::string("False");
+        case OSCPP::Tag::Char:   return std::to_string(num.c);
+        case OSCPP::Tag::Int32:  return std::to_string(num.i);
+        case OSCPP::Tag::Int64:  return std::to_string(num.l);
+        case OSCPP::Tag::Float:  return std::to_string(num.f);
+        case OSCPP::Tag::Double: return std::to_string(num.d);
+        default:                 return OSCPP::TagName(tag);
+    }\
+}
+
 END_NAMESPACE_OFX_MODERN_OSC
