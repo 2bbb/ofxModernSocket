@@ -40,7 +40,6 @@ namespace ofx {
             std::unordered_multimap<std::string, Callback> callbacks;
             std::unordered_multimap<std::string, AbstractThreadedCallbackRef> thread_processes;
             
-        protected:
             virtual void receive(const boost::system::error_code &error_code,
                                  std::array<char, buf_size> &buf,
                                  std::size_t len) override;
@@ -61,16 +60,6 @@ namespace ofx {
                 callbacks.insert(std::make_pair(bindAddress, callback));
             }
             
-            template <typename Prepared>
-            void addThreadCallback(const std::string &bindAddress,
-                                   ThreadProcess<Prepared> thread_process,
-                                   PreparedCallback<Prepared> callback);
-            
-            template <typename ThreadProcess, typename Callback>
-            void addThreadCallback(const std::string &bindAddress,
-                                   ThreadProcess tp,
-                                   Callback cb);
-            
             using iterator = std::vector<ofxModernOscMessage>::iterator;
             using const_iterator = std::vector<ofxModernOscMessage>::const_iterator;
             
@@ -80,6 +69,26 @@ namespace ofx {
             const_iterator end() const { return leakedMessages.cend(); }
             const_iterator cbegin() const { return leakedMessages.cbegin(); }
             const_iterator cend() const { return leakedMessages.cend(); }
+            
+            template <typename Prepared>
+            void addThreadCallback(const std::string &bindAddress,
+                                   ThreadProcess<Prepared> thread_process,
+                                   PreparedCallback<Prepared> callback)
+            {
+                thread_processes.insert(std::make_pair(bindAddress, makeThreadedCallback(thread_process, callback)));
+            }
+            
+            template <typename ThreadProcess, typename Callback>
+            void addThreadCallback(const std::string &bindAddress, ThreadProcess tp, Callback cb) {
+                static_assert(is_argument_message<ThreadProcess>(), "argument of ThreadProcess is not ofxModernOscMessage.");
+                static_assert(is_callable<ThreadProcess>::value, "ThreadProcess is not function.");
+                static_assert(is_callable<Callback>::value, "Callback is not function.");
+                static_assert(composable<ThreadProcess, Callback>(), "result of ThreadProcess is not argument of Callback.");
+                
+                addThreadCallback(bindAddress,
+                                  static_cast<typename function_info<ThreadProcess>::function_type>(tp),
+                                  static_cast<typename function_info<Callback>::function_type>(cb));
+            }
         };
     };
 };

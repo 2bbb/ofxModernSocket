@@ -103,25 +103,5 @@ void Receiver::update(ofEventArgs &) {
     for(auto process : thread_processes) process.second->call();
 }
 
-template <typename Prepared>
-void Receiver::addThreadCallback(const std::string &bindAddress,
-                       ThreadProcess<Prepared> thread_process,
-                       PreparedCallback<Prepared> callback)
-{
-    thread_processes.insert(std::make_pair(bindAddress, makeThreadedCallback(thread_process, callback)));
-}
-
-template <typename ThreadProcess, typename Callback>
-void Receiver::addThreadCallback(const std::string &bindAddress, ThreadProcess tp, Callback cb) {
-    static_assert(is_argument_message<ThreadProcess>(), "argument of ThreadProcess is not ofxModernOscMessage.");
-    static_assert(is_callable<ThreadProcess>::value, "ThreadProcess is not function.");
-    static_assert(is_callable<Callback>::value, "Callback is not function.");
-    static_assert(composable<ThreadProcess, Callback>(), "result of ThreadProcess is not argument of Callback.");
-    
-    addThreadCallback(bindAddress,
-                      static_cast<typename function_info<ThreadProcess>::function_type>(tp),
-                      static_cast<typename function_info<Callback>::function_type>(cb));
-}
-
 
 END_NAMESPACE_OFX_MODERN_OSC
