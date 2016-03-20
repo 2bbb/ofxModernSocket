@@ -17,6 +17,23 @@
 
 BEGIN_NAMESPACE_OFX_MODERN_OSC
 
+Argument::Argument(OSCPP::TagType tag)
+: tag(tag) {
+    switch(tag) {
+        case OSCPP::Tag::True:
+            num.b = true;
+            break;
+        case OSCPP::Tag::False:
+            num.b = false;
+            break;
+        case OSCPP::Tag::NIL:
+        case OSCPP::Tag::IMPULSE:
+            break;
+        default:
+            ofLogWarning("ofxModernOscMessage") << "invalid message: tag is " << tag << " [" << OSCPP::TagName(tag) << "]. but argument is not given.";
+    }
+}
+
 #define cast_num(type, name) static_cast<type>(num.name)
 
 #define define_num_cast_operator(type)\

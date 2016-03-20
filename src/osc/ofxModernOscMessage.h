@@ -26,6 +26,7 @@ namespace ofx {
             
             const OSCPP::TagType tag;
             
+            Argument(OSCPP::TagType tag);
             Argument(OSCPP::TagType tag, std::int8_t c)
             : tag(tag) { num.c = c; }
             Argument(OSCPP::TagType tag, std::int32_t i)
