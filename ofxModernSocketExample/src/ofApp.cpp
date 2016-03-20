@@ -11,7 +11,12 @@ public:
         receiver.setup(9005);
         receiver.addCallback("/test", [](ofxModernOscMessage &mess) { ofLogNotice("ofApp") << mess; });
     }
-    void update() {}
+    void update() {
+        for(auto mess : receiver) {
+            // get leaked messages (are not match address pattern) with iteration
+            ofLogNotice("leaked") << "leaked: " << mess;
+        }
+    }
     void draw() {
         ofDrawBitmapString(ofToString(ofGetFrameNum()), 20, 20);
         ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 40);
