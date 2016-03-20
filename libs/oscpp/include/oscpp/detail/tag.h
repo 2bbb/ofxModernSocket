@@ -26,9 +26,9 @@
 	See : http://cnmat.berkeley.edu/system/files/attachments/Nime09OSCfinal.pdf
 	*/
 
-#define TagCase(Name) case Tag::Name: return #Name;
 
 namespace OSCPP {
+#define TagCase(Name) case Tag::Name: return #Name;
     namespace Tag {
         static constexpr char Int32 = 'i';
         static constexpr char Int64 = 'h';
@@ -63,6 +63,5 @@ namespace OSCPP {
             default: return "unknown tag";
         }
     }
-};
-
 #undef TagCase
+};
