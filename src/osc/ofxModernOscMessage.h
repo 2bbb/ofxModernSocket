@@ -21,6 +21,8 @@ namespace ofx {
             std::string address;
             template <typename ... ArgumentTypes>
             
+            Message() {};
+            
             Message(std::string &address)
             : address(address) {}
             
@@ -81,8 +83,8 @@ namespace ofx {
             const_reverse_iterator crbegin() const { return args.crbegin(); }
             const_reverse_iterator crend() const { return args.crend(); }
         };
+        std::ostream &operator<<(std::ostream &os, const Message &mess);
     };
 };
 
 using ofxModernOscMessage = ofx::ModernOsc::Message;
-std::ostream &operator<<(std::ostream &os, const ofxModernOscMessage &mess);
