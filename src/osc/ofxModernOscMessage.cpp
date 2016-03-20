@@ -58,4 +58,5 @@ define_num_cast_operator(float);
 define_num_cast_operator(double);
 
 #undef cast_num
+#undef define_num_cast_operator
 END_NAMESPACE_OFX_MODERN_OSC
