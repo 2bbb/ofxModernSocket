@@ -25,6 +25,35 @@ namespace ofx {
             
             const TagType tag;
             
+            Argument(bool b)
+            : tag(b ? Tag::True : Tag::False) { num.b = b; }
+            Argument(std::int8_t c)
+            : tag(Tag::Char) { num.c = c; }
+            
+            Argument(std::uint8_t i)
+            : tag(Tag::Int32) { num.i = i; }
+            Argument(std::int16_t i)
+            : tag(Tag::Int32) { num.i = i; }
+            Argument(std::uint16_t i)
+            : tag(Tag::Int32) { num.i = i; }
+            Argument(std::int32_t i)
+            : tag(Tag::Int32) { num.i = i; }
+
+            Argument(std::uint32_t l)
+            : tag(Tag::Int64) { num.l = l; }
+            Argument(std::int64_t l)
+            : tag(Tag::Int64) { num.l = l; }
+            Argument(std::uint64_t l)
+            : tag(Tag::Int64) { num.l = l; }
+            
+            Argument(float f)
+            : tag(Tag::Float) { num.f = f; }
+            Argument(double d)
+            : tag(Tag::Double) { num.d = d; }
+
+            Argument(const std::string &str)
+            : tag(Tag::String), str(str) {}
+            
             Argument(TagType tag);
             Argument(TagType tag, std::int8_t c)
             : tag(tag) { num.c = c; }
