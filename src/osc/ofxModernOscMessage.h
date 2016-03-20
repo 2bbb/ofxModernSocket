@@ -18,7 +18,7 @@ namespace ofx {
         class Message {
             std::vector<Argument> args;
         public:
-            const std::string address;
+            std::string address;
             template <typename ... ArgumentTypes>
             
             Message(std::string &address)
