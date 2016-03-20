@@ -26,6 +26,8 @@
 	See : http://cnmat.berkeley.edu/system/files/attachments/Nime09OSCfinal.pdf
 	*/
 
+#define TagCase(Name) case Tag::Name: return #Name;
+
 namespace OSCPP {
     namespace Tag {
         static constexpr char Int32 = 'i';
@@ -42,4 +44,25 @@ namespace OSCPP {
         static constexpr char IMPULSE = 'I';
         static constexpr char Timetag = 't';
     };
+    using TagType = char;
+    static std::string TagName(TagType tag) {
+        switch(tag) {
+                TagCase(Int32);
+                TagCase(Int64);
+                TagCase(Float);
+                TagCase(Double);
+                TagCase(String);
+                TagCase(Symbol);
+                TagCase(Char);
+                TagCase(Midi4);
+                TagCase(True);
+                TagCase(False);
+                TagCase(NIL);
+                TagCase(IMPULSE);
+                TagCase(Timetag);
+            default: return "unknown tag";
+        }
+    }
 };
+
+#undef TagCase
