@@ -15,6 +15,10 @@
 
 using boost::asio::ip::udp;
 
+ofxModernUDPReceiver::~ofxModernUDPReceiver() {
+    socket.close();
+}
+
 void ofxModernUDPReceiver::receive(const boost::system::error_code &error_code,
                                         std::array<char, buf_size> &buf,
                                         std::size_t len) {
@@ -34,18 +38,17 @@ bool ofxModernUDPReceiver::setup(int port) {
         boost::system::error_code error;
         std::array<char, buf_size> recv_buf;
         std::size_t len = 0;
-        while(true) {
-            len = this->socket.receive_from(boost::asio::buffer(recv_buf), remote_endpoint, 0, error);
-            if(error) {
-                if(error != boost::asio::error::message_size) {
-                    std::cout << error << std::endl;
+        while(this->socket.is_open()) {
+            try {
+                len = this->socket.receive_from(boost::asio::buffer(recv_buf), remote_endpoint, 0, error);
+                if(error) {
+                    ofLogError("ofxModernUDPReceiver") << error;
                 } else {
-                    std::cout << "message_size: " << error;
+                    this->receive(error, recv_buf, len);
                 }
-            } else {
-                this->receive(error, recv_buf, len);
+            } catch(exception &e) {
+                ofLogError("ofxModernUDPReceiver") << e.what();
             }
-            usleep(10);
         }
     });
     

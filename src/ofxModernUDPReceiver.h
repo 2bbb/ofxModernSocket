@@ -1,5 +1,5 @@
 //
-//  ofxModernUDPReceiver.hpp
+//  ofxModernUDPReceiver.h
 //
 //  Created by ISHII 2bit on 2016/03/20.
 //
@@ -22,5 +22,6 @@ protected:
                          std::size_t len);
 public:
     ofxModernUDPReceiver() : ofxModernUDPSocket() {}
+    virtual ~ofxModernUDPReceiver();
     bool setup(int port);
 };
