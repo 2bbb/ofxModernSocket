@@ -25,7 +25,7 @@ void ofxModernUDPReceiver::receive(const boost::system::error_code &error_code,
     std::cout.write(buf.data(), len);
 }
 
-bool ofxModernUDPReceiver::setup(int port) {
+[[ nodiscard ]] bool ofxModernUDPReceiver::setup(int port) {
     try {
         socket = udp::socket(io_service, udp::endpoint(udp::v4(), port));
     } catch(std::exception &e) {
@@ -42,7 +42,7 @@ bool ofxModernUDPReceiver::setup(int port) {
             try {
                 len = this->socket.receive_from(boost::asio::buffer(recv_buf), remote_endpoint, 0, error);
                 if(error) {
-                    ofLogError("ofxModernUDPReceiver") << error;
+                    ofLogError("ofxModernUDPReceiver") << error.message();
                 } else {
                     this->receive(error, recv_buf, len);
                 }
