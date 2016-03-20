@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		95C0BB0A1C9E370E0043897F /* ofxModernUDPSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95C0BB081C9E370E0043897F /* ofxModernUDPSocket.cpp */; };
-		95C0BCB71C9E3BF20043897F /* ofxModernUDPReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95C0BCB51C9E3BF20043897F /* ofxModernUDPReceiver.cpp */; };
 		95C0BCD21C9E63640043897F /* ofxModernOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95C0BCD01C9E63640043897F /* ofxModernOscMessage.cpp */; };
 		95C0BCD31C9E6E9E0043897F /* ofxModernOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95C0BCCE1C9E63430043897F /* ofxModernOscReceiver.cpp */; };
 		95C0BCD71C9E798A0043897F /* ofxModernOscArgument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95C0BCD51C9E798A0043897F /* ofxModernOscArgument.cpp */; };
+		95C8BFAE1C9EA7FA00143C30 /* ofxModernUDPReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95C8BFAA1C9EA7EF00143C30 /* ofxModernUDPReceiver.cpp */; };
+		95C8BFAF1C9EA7FA00143C30 /* ofxModernUDPSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95C8BFAC1C9EA7EF00143C30 /* ofxModernUDPSocket.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
 /* End PBXBuildFile section */
@@ -46,10 +46,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		95C0BB081C9E370E0043897F /* ofxModernUDPSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxModernUDPSocket.cpp; sourceTree = "<group>"; };
-		95C0BB091C9E370E0043897F /* ofxModernUDPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxModernUDPSocket.h; sourceTree = "<group>"; };
-		95C0BCB51C9E3BF20043897F /* ofxModernUDPReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxModernUDPReceiver.cpp; sourceTree = "<group>"; };
-		95C0BCB61C9E3BF20043897F /* ofxModernUDPReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxModernUDPReceiver.h; sourceTree = "<group>"; };
 		95C0BCBE1C9E4EB70043897F /* client.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = client.hpp; sourceTree = "<group>"; };
 		95C0BCC01C9E4EB70043897F /* endian.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = endian.hpp; sourceTree = "<group>"; };
 		95C0BCC11C9E4EB70043897F /* host.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = host.hpp; sourceTree = "<group>"; };
@@ -633,6 +629,10 @@
 		95C8BF951C9E937500143C30 /* w32_regex_traits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = w32_regex_traits.hpp; sourceTree = "<group>"; };
 		95C8BF961C9E937500143C30 /* regex_fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = regex_fwd.hpp; sourceTree = "<group>"; };
 		95C8BF971C9E937500143C30 /* LICENSE_1_0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE_1_0.txt; sourceTree = "<group>"; };
+		95C8BFAA1C9EA7EF00143C30 /* ofxModernUDPReceiver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxModernUDPReceiver.cpp; sourceTree = "<group>"; };
+		95C8BFAB1C9EA7EF00143C30 /* ofxModernUDPReceiver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxModernUDPReceiver.h; sourceTree = "<group>"; };
+		95C8BFAC1C9EA7EF00143C30 /* ofxModernUDPSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxModernUDPSocket.cpp; sourceTree = "<group>"; };
+		95C8BFAD1C9EA7EF00143C30 /* ofxModernUDPSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxModernUDPSocket.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* ofxModernSocketExampleDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ofxModernSocketExampleDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
@@ -684,10 +684,7 @@
 			children = (
 				95C0BCCB1C9E61540043897F /* detail */,
 				95C0BCC91C9E51640043897F /* ofxModernSocket.h */,
-				95C0BB091C9E370E0043897F /* ofxModernUDPSocket.h */,
-				95C0BB081C9E370E0043897F /* ofxModernUDPSocket.cpp */,
-				95C0BCB61C9E3BF20043897F /* ofxModernUDPReceiver.h */,
-				95C0BCB51C9E3BF20043897F /* ofxModernUDPReceiver.cpp */,
+				95C8BFA91C9EA7EF00143C30 /* udp */,
 				95C0BCCD1C9E63430043897F /* osc */,
 			);
 			path = src;
@@ -1583,6 +1580,17 @@
 			path = v4;
 			sourceTree = "<group>";
 		};
+		95C8BFA91C9EA7EF00143C30 /* udp */ = {
+			isa = PBXGroup;
+			children = (
+				95C8BFAB1C9EA7EF00143C30 /* ofxModernUDPReceiver.h */,
+				95C8BFAA1C9EA7EF00143C30 /* ofxModernUDPReceiver.cpp */,
+				95C8BFAD1C9EA7EF00143C30 /* ofxModernUDPSocket.h */,
+				95C8BFAC1C9EA7EF00143C30 /* ofxModernUDPSocket.cpp */,
+			);
+			path = udp;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1717,10 +1725,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				95C0BCD31C9E6E9E0043897F /* ofxModernOscReceiver.cpp in Sources */,
+				95C8BFAF1C9EA7FA00143C30 /* ofxModernUDPSocket.cpp in Sources */,
+				95C8BFAE1C9EA7FA00143C30 /* ofxModernUDPReceiver.cpp in Sources */,
 				95C0BCD71C9E798A0043897F /* ofxModernOscArgument.cpp in Sources */,
 				95C0BCD21C9E63640043897F /* ofxModernOscMessage.cpp in Sources */,
-				95C0BCB71C9E3BF20043897F /* ofxModernUDPReceiver.cpp in Sources */,
-				95C0BB0A1C9E370E0043897F /* ofxModernUDPSocket.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
