@@ -21,5 +21,9 @@ BEGIN_NAMESPACE_OFX_MODERN_OSC
 END_NAMESPACE_OFX_MODERN_OSC
 
 std::ostream &operator<<(std::ostream &os, const ofxModernOscMessage &mess) {
-    return os;
+    os << mess.address << " :[" << std::endl;
+    for(std::size_t i = 0; i < mess.size(); i++) {
+        os << "  " << i << ": " << mess[i] << std::endl;
+    }
+    return os << "]";
 }
