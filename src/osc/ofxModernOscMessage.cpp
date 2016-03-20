@@ -49,7 +49,7 @@ Argument::operator type() const {\
         case OSCPP::Tag::Double: return cast_num(type, d);\
         case OSCPP::Tag::String: return static_cast<type>(std::stol(str));\
         default:\
-            ofLogError("ofxModernOscMessage") << ("argument is not " #type ": ") << OSCPP::TagName(tag);\
+            ofLogWarning("ofxModernOscMessage") << ("argument is not " #type ": ") << OSCPP::TagName(tag);\
             return static_cast<type>(0);\
     }\
 }
